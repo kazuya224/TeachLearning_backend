@@ -1,4 +1,5 @@
 package com.kazuya.teach_learning_backend.entity;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -6,14 +7,15 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 @Data
-public class users {
+public class User {
+
     @Id
-    @Column(name="user_id", columnDefinition="uuid")
+    @Column(name = "user_id", columnDefinition = "uuid")
     private UUID userId;
 
-    @Column(nullalbe=false, unique=true, length=255)
+    @Column(nullable = false, unique = true, length = 255)
     private String email;
 
     @Column(name = "password_hash", nullable = false, length = 255)

@@ -1,4 +1,4 @@
-package com.kazuya.teachlearningbackend.entity;
+package com.kazuya.teach_learning_backend.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -25,7 +25,7 @@ public class Chat {
     private String roleFlg;
 
     @Column(name = "turn_number", nullable = false)
-    private Short turnNumber;   // SMALLINT → Short が自然
+    private Short turnNumber; // SMALLINT → Short が自然
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;

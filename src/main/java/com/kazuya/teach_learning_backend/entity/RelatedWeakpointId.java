@@ -1,4 +1,4 @@
-package com.kazuya.teachlearningbackend.entity;
+package com.kazuya.teach_learning_backend.entity;
 
 import lombok.Data;
 
