@@ -29,6 +29,7 @@ public class UserService {
 
         // 3. 成功したらレスポンスを返す
         return new LoginResponse(
+                1,
                 user.getUserId(),
                 user.getName(),
                 user.getEmail());

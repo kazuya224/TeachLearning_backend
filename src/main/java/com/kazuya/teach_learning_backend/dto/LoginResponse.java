@@ -8,6 +8,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 public class LoginResponse {
+    private Integer responseStatus;
     private UUID userId;
     private String name;
     private String email;

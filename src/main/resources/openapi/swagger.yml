@@ -1,0 +1,66 @@
+openapi: 3.0.1
+info:
+  title: Teach Learning API
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /api/auth/login:
+    post:
+      summary: "ログイン"
+      description: "メールアドレスとパスワードでログインし、JWTを返します。"
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: "ログイン成功"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
+        "401":
+          description: "認証失敗"
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Invalid email or password"
+
+components:
+  schemas:
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          example: "test@example.com"
+        password:
+          type: string
+          example: "password123"
+
+    LoginResponse:
+      type: object
+      properties:
+        responseStatus:
+          type: integer
+          description: "ログイン成功時に1、失敗時に0を返す"
+        userId:
+          type: string
+          example: "d7af9da5-3e50-4e97-a9b9-2a58c895d92f"
+        name:
+          type: string
+          example: "Kazuya"
+        token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR..."

@@ -55,6 +55,14 @@
     <artifactId>spring-security-crypto</artifactId>
 </dependency>
 
+<!-- swagger -->
+<dependency>
+    <groupId>org.springdoc</groupId>
+    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    <version>2.5.0</version>
+</dependency>
+
+
 <!-- Lombok（@Data などを使うため） -->
 <dependency>
     <groupId>org.projectlombok</groupId>
@@ -64,12 +72,58 @@
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+    <plugins>
+        <!-- Spring Boot 起動用 -->
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+
+        <!-- OpenAPI Generator プラグイン -->
+        <plugin>
+            <groupId>org.openapitools</groupId>
+            <artifactId>openapi-generator-maven-plugin</artifactId>
+            <version>7.8.0</version>
+            <executions>
+                <execution>
+                    <id>generate-spring-server</id>
+                    <phase>generate-sources</phase>
+                    <goals>
+                        <goal>generate</goal>
+                    </goals>
+                    <configuration>
+                        <!-- swagger.yml の場所。自分が置いたパスに合わせてOK -->
+                        <inputSpec>
+                            ${project.basedir}/src/main/resources/openapi/swagger.yml
+                        </inputSpec>
+
+                        <!-- 何を生成するか：spring サーバースタブ -->
+                        <generatorName>spring</generatorName>
+
+                        <!-- 出力先 -->
+                        <output>
+                            ${project.build.directory}/generated-sources/openapi
+                        </output>
+
+                        <!-- 生成される API インターフェイスのパッケージ -->
+                        <apiPackage>com.kazuya.teachlearningbackend.api</apiPackage>
+
+                        <!-- 生成される DTO / モデルのパッケージ -->
+                        <modelPackage>com.kazuya.teachlearningbackend.model</modelPackage>
+
+                        <!-- オプション設定 -->
+                        <configOptions>
+                            <!-- interface のみ生成（実装は自分で書く） -->
+                            <interfaceOnly>true</interfaceOnly>
+                            <!-- Lombok を使いたい場合 -->
+                            <useLombok>true</useLombok>
+                        </configOptions>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+
 
 </project>
