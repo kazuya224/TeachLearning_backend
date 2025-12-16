@@ -59,7 +59,7 @@
 <dependency>
     <groupId>org.springdoc</groupId>
     <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-    <version>2.5.0</version>
+    <version>3.0.0</version>
 </dependency>
 
 
@@ -106,10 +106,10 @@
                         </output>
 
                         <!-- 生成される API インターフェイスのパッケージ -->
-                        <apiPackage>com.kazuya.teachlearningbackend.api</apiPackage>
+                        <apiPackage>com.kazuya.teach_learning_backend.api</apiPackage>
 
                         <!-- 生成される DTO / モデルのパッケージ -->
-                        <modelPackage>com.kazuya.teachlearningbackend.model</modelPackage>
+                        <modelPackage>com.kazuya.teach_learning_backend.dto</modelPackage>
 
                         <!-- オプション設定 -->
                         <configOptions>
@@ -117,7 +117,11 @@
                             <interfaceOnly>true</interfaceOnly>
                             <!-- Lombok を使いたい場合 -->
                             <useLombok>true</useLombok>
+                            <skipDefaultInterface>true</skipDefaultInterface>
+    <hideGenerationTimestamp>true</hideGenerationTimestamp>
+    <useSpringBoot3>true</useSpringBoot3>
                         </configOptions>
+                        
                     </configuration>
                 </execution>
             </executions>

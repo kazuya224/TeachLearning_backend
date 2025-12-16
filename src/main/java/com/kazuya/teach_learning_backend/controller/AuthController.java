@@ -2,10 +2,14 @@ package com.kazuya.teach_learning_backend.controller;
 
 import com.kazuya.teach_learning_backend.dto.LoginRequest;
 import com.kazuya.teach_learning_backend.dto.LoginResponse;
+import com.kazuya.teach_learning_backend.dto.SignupRequest;
+import com.kazuya.teach_learning_backend.dto.SignupResponse;
 import com.kazuya.teach_learning_backend.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -29,4 +33,17 @@ public class AuthController {
                     .body(e.getMessage());
         }
     }
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> signup(@RequestBody SignupRequest request) {
+        try {
+            SignupResponse response = userService.signup(request);
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            // 認証失敗時は 401 を返す
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(e.getMessage());
+        }
+    }
+
 }

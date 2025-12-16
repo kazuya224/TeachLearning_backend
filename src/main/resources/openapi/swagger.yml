@@ -34,6 +34,33 @@ paths:
                 type: string
                 example: "Invalid email or password"
 
+  /api/auth/signup:
+    post:
+      summary: "新規登録"
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignupRequest"
+
+      responses:
+        "200":
+          description: "アカウント作成成功"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SignupResponse"
+        "401":
+          description: "作成失敗"
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Invalid email or password"
+
 components:
   schemas:
     LoginRequest:
@@ -64,3 +91,22 @@ components:
         token:
           type: string
           example: "eyJhbGciOiJIUzI1NiIsInR..."
+
+    SignupRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+
+    SignupResponse:
+      type: object
+      properties:
+        responseStatus:
+          type: integer
+          description: "ログイン成功時に1、失敗時に0を返す"
+        
