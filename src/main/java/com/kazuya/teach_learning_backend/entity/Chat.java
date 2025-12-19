@@ -6,6 +6,9 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 @Table(name = "chats")
 @Data
@@ -25,11 +28,13 @@ public class Chat {
     private String roleFlg;
 
     @Column(name = "turn_number", nullable = false)
-    private Short turnNumber; // SMALLINT → Short が自然
+    private short turnNumber; // SMALLINT → Short が自然
 
+    @CreationTimestamp
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 }

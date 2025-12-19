@@ -69,6 +69,16 @@
     <artifactId>lombok</artifactId>
     <optional>true</optional>
 </dependency>
+<dependency>
+  <groupId>org.openapitools</groupId>
+  <artifactId>jackson-databind-nullable</artifactId>
+  <version>0.2.6</version>
+</dependency>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-restclient</artifactId>
+</dependency>
+
     </dependencies>
 
     <build>
@@ -92,37 +102,23 @@
                         <goal>generate</goal>
                     </goals>
                     <configuration>
-                        <!-- swagger.yml の場所。自分が置いたパスに合わせてOK -->
-                        <inputSpec>
-                            ${project.basedir}/src/main/resources/openapi/swagger.yml
-                        </inputSpec>
+        <inputSpec>${project.basedir}/src/main/resources/openapi/swagger.yml</inputSpec>
+        <generatorName>spring</generatorName>
+        <output>${project.build.directory}/generated-sources/openapi</output>
 
-                        <!-- 何を生成するか：spring サーバースタブ -->
-                        <generatorName>spring</generatorName>
+        <apiPackage>com.kazuya.teach_learning_backend.api</apiPackage>
+        <modelPackage>com.kazuya.teach_learning_backend.openapi.dto</modelPackage>
 
-                        <!-- 出力先 -->
-                        <output>
-                            ${project.build.directory}/generated-sources/openapi
-                        </output>
-
-                        <!-- 生成される API インターフェイスのパッケージ -->
-                        <apiPackage>com.kazuya.teach_learning_backend.api</apiPackage>
-
-                        <!-- 生成される DTO / モデルのパッケージ -->
-                        <modelPackage>com.kazuya.teach_learning_backend.dto</modelPackage>
-
-                        <!-- オプション設定 -->
-                        <configOptions>
-                            <!-- interface のみ生成（実装は自分で書く） -->
-                            <interfaceOnly>true</interfaceOnly>
-                            <!-- Lombok を使いたい場合 -->
-                            <useLombok>true</useLombok>
-                            <skipDefaultInterface>true</skipDefaultInterface>
-    <hideGenerationTimestamp>true</hideGenerationTimestamp>
-    <useSpringBoot3>true</useSpringBoot3>
+        <configOptions>
+          <interfaceOnly>true</interfaceOnly>
+          <useLombok>true</useLombok>
+          <skipDefaultInterface>true</skipDefaultInterface>
+          <hideGenerationTimestamp>true</hideGenerationTimestamp>
+          <useJakartaEe>true</useJakartaEe>
                         </configOptions>
                         
-                    </configuration>
+</configuration>
+
                 </execution>
             </executions>
         </plugin>
